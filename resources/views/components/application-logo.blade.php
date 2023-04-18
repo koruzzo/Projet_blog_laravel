@@ -1,0 +1,1 @@
+<h1 class="title-font text-lg font-medium text-gray-900">BLOG SPATIAL</h1>
