@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('role'); //ADMIN = 1, user = 0
+            $table->boolean('role')->default(false); //ADMIN = true, user = false
         });
     }
 
