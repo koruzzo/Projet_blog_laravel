@@ -5,7 +5,6 @@
         </h2>
     </x-slot>
 
-<!-- component -->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -32,9 +31,9 @@
         <div class="container px-5 py-5 mx-auto">
             <h2 class="title-font text-lg text-2xl pb-5 text-gray-900 mb-3">Chat du post :</h2>
 
-            <div class="grid grid-cols-1 gap-4"> <!-- Utiliser une grille avec 1 colonne pour afficher les éléments l'un au-dessus de l'autre -->
-                <div class="col-span-1"> <!-- Première colonne pour le chat -->
-                    <div class="border border-black rounded-lg bg-white"> <!-- Ajouter une bordure noire avec des bords ronds et un fond blanc -->
+            <div class="grid grid-cols-1 gap-4"> 
+                <div class="col-span-1"> 
+                    <div class="border border-black rounded-lg bg-white"> 
                         @foreach($post->chirps as $chirp)
                         <div class="chirp-message @if(auth()->check() && $chirp->user_id === auth()->user()->id) right @else left @endif">
                             <p class="@if(auth()->check() && $chirp->user_id === auth()->user()->id) text-right @else text-left @endif p-2">
@@ -45,7 +44,7 @@
                     </div>
                 </div>
 
-                <div class="col-span-1"> <!-- Deuxième colonne pour le formulaire de chat -->
+                <div class="col-span-1">
                     @if(auth()->check())
                         <form action="{{ route('chirps.send', $post->id) }}" method="post">
                             @csrf
