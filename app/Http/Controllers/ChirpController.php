@@ -35,6 +35,7 @@ class ChirpController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        /*
         $validated = $request->validate([
             'message' => 'required|string|max:255',
         ]);
@@ -42,6 +43,7 @@ class ChirpController extends Controller
         $request->user()->chirps()->create($validated);
  
         return redirect(route('chirps.index'));
+        */
     }
  
     /**
@@ -57,42 +59,66 @@ class ChirpController extends Controller
      */
     public function edit(Chirp $chirp): View
     {
-        //
+        /*
         $this->authorize('update', $chirp);
- 
+    
         return view('chirps.edit', [
             'chirp' => $chirp,
         ]);
+        */
     }
- 
+
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Chirp $chirp): RedirectResponse
     {
-        //
+     /*
         $this->authorize('update', $chirp);
- 
+    
         $validated = $request->validate([
             'message' => 'required|string|max:255',
         ]);
- 
+    
         $chirp->update($validated);
- 
-        return redirect(route('chirps.index'));
+    
+        return redirect()->back()->with('success', 'Le message a été mis à jour avec succès.');
+        */
     }
- 
+    
     /**
-     * Remove the specified resource from storage.
+     * Supprime la ressource spécifiée du stockage.
      */
     public function destroy(Chirp $chirp): RedirectResponse
     {
-        //
+        // Vérifier si l'utilisateur actuel est autorisé à supprimer ce message
         $this->authorize('delete', $chirp);
- 
+    
         $chirp->delete();
- 
-        return redirect(route('chirps.index'));
+    
+        return redirect()->back()->with('success', 'Le message a été supprimé avec succès.');
     }
+
+    public function sendMessage(Request $request, Post $post)
+    {
+        $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        $user = auth()->user();
+
+        $chirp = new Chirp([
+            'message' => $request->message,
+            'user_id' => $user->id,
+            'post_id' => $post->id,
+        ]);
+
+        $chirp->save();
+
+        return redirect()->route('posts.show', $post->id)->with('success', 'Votre message a été envoyé.');
+    }
+
+
+
  
 }
