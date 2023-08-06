@@ -13,14 +13,14 @@
     <link href="https://unpkg.com/tailwindcss@2.2.4/dist/tailwind.min.css" rel="stylesheet">
 </head>
 <body>
-    
+
     <section class="text-gray-600 body-font h-full">
         <div class="flex mt-10 ml-12 font-bold"><a href="{{ route('posts.index') }}"> <- Retour au menu</a></div>
         <div class="container px-5 py-5 mx-auto">
             <div class="flex flex-wrap m-4 justify-center">
                 <div class="flex w-full justify-center"><h1 class="title-font text-lg text-3xl pb-5 text-gray-900 mb-3">{{$post->title}}</h1></div>
                 <div class="flex w-full pb-2 justify-center"><p class="font-bold">Par : {{ $post->user->name }}</p><p class="ml-3">le : {{ $post->created_at->format('d M Y') }}</p></div>
-                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{ asset('/storage/'. $post->picture) }}"/>
+                <img class="lg:h-48 md:h-36 w-full object-cover object-center" src="{{asset('/storage/'. $post->picture) }}"/>
                 <div class="flex items-center flex-wrap"><p class=" p-5" >{{$post->content}}</p></div>
             </div>
         </div>
